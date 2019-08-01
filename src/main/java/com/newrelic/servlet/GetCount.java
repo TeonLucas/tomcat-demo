@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  * @author davidmorris
  */
 @WebServlet("/count")
-public class GetState extends HttpServlet {
+public class GetCount extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,8 +53,9 @@ public class GetState extends HttpServlet {
 			System.exit(0);
 		}
 
-		// Add state to Transaction
-		NewRelic.addCustomParameter("count", count);
+		// Add user info to Transaction
+		NewRelic.addCustomParameter("userCount", count);
+		NewRelic.addCustomParameter("userId", id);
 
 		resp.setContentType("text/plain");
 		resp.getWriter().write("Welcome User, session: " + id + "\n");
