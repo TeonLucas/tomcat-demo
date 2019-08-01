@@ -1,7 +1,7 @@
 # tomcat-demo
 Tomcat Docker image with sample app and New Relic monitoring agent
 
-## How to build tomcat-java-agent image
+## How to build tomcat-demo image
 Pull tomcat jre8 image, add monitoring agent and config script
 ```sh
 mvn clean install
