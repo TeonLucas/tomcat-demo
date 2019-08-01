@@ -12,12 +12,11 @@ import javax.servlet.ServletContextListener;
 public class StartStop implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		System.out.println("Stateful Server started, initializing OpenTracing");
 		ServletContext ctx = servletContextEvent.getServletContext();
 		
 		// Open database
 		DbConnection db = new DbConnection("session.db");
-    	ctx.setAttribute("DB", db);
+    		ctx.setAttribute("DB", db);
 	}
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

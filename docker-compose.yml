@@ -1,8 +1,8 @@
 version: '2.2'
 services:
   tomcat-demo:
-    image: tomcat-java-agent
-    build: ./tomcat-java-agent
+    image: tomcat-demo
+    build: .
     container_name: tomcat-demo
     ports:
       - "8080:8080"

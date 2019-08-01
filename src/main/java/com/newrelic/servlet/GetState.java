@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author davidmorris
  */
-@WebServlet("/state")
+@WebServlet("/count")
 public class GetState extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,21 +32,21 @@ public class GetState extends HttpServlet {
 		// Get session id
 		HttpSession session = req.getSession();
 		String id = session.getId();
-		Integer state = 0;
+		Integer count = 0;
 
 		DbConnection db = (DbConnection) ctx.getAttribute("DB");
 		Connection con = db.getConnection();
 		Statement stmt;
 		try {
 			stmt = con.createStatement();
-			// Increment state
-			String sql = "UPDATE users SET state = (state + 1) WHERE id = '" + id + "';";
+			// Increment count
+			String sql = "UPDATE users SET count = (count + 1) WHERE id = '" + id + "';";
 			stmt.executeUpdate(sql);
 
 			// Query state
-		    sql = "SELECT state FROM users WHERE id = '" + id + "';";
+		    sql = "SELECT count FROM users WHERE id = '" + id + "';";
 			ResultSet resultSet = stmt.executeQuery(sql);
-			state = resultSet.getInt(1);
+			count = resultSet.getInt(1);
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -54,10 +54,10 @@ public class GetState extends HttpServlet {
 		}
 
 		// Add state to Transaction
-		NewRelic.addCustomParameter("state", state);
+		NewRelic.addCustomParameter("count", count);
 
 		resp.setContentType("text/plain");
-		resp.getWriter().write("Welcome User, session: " + id);
-		resp.getWriter().write("• State: " + state.toString());
+		resp.getWriter().write("Welcome User, session: " + id + "\n");
+		resp.getWriter().write("Count: " + count.toString() + "\n");
 	}
 }

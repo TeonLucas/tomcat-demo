@@ -25,7 +25,7 @@ public class DbConnection {
 		try {
 			Statement stmt = this.con.createStatement();
 			String sql = "CREATE TABLE IF NOT EXISTS users (id CHAR(32) PRIMARY KEY,"
-					+ " state INTEGER DEFAULT 0, filename TEXT) WITHOUT ROWID;";
+					+ " count INTEGER DEFAULT 0, filename TEXT) WITHOUT ROWID;";
 			stmt.executeUpdate(sql);
 	        stmt.close();
 		} catch (SQLException e) {
